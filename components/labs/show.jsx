@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'wouter';
+import Card from 'react-bootstrap/Card';
 import fb from '../../firebase';
 const DB = fb.firestore()
 const Labslist = DB.collection('labs');
@@ -26,14 +27,18 @@ const LabDetailView = ({id}) => {
             
             </div>
 
-        
+            <Card style={{  borderWidth: '2px', borderStyle: 'solid', margin: '100px', borderRadius: '12px',backgroundColor:'hsl(209, 98%, 52%, 0.3)'}}>
+                <Card.Body>
             <div>
-                <p> Title: {labs.Title}</p>
-                <p> Overview: {labs.Overview} </p>
-                <p> Professor: {labs.Prof}</p>
-                <p> Body: {labs.Body} </p>
+            
+                <h1> {labs.Title}</h1>
+                <h2> {labs.Department}</h2>
+                <h3> {labs.Overview} </h3>
+                <h3> Professor: {labs.Prof}</h3>
+                <p> {labs.Body} </p>
                 <p> Skills: {labs.Skills}</p>
-                <p> Semesters: {labs.Semester} </p>
+                <h4> Semesters: {labs.Semester} </h4>
+                
             </div>
 
             
@@ -44,7 +49,8 @@ const LabDetailView = ({id}) => {
 
                         </li>
            
-                  
+                        </Card.Body>
+                </Card>
                     
                     <br></br><br></br>
                     <div className='ending'>why</div>
