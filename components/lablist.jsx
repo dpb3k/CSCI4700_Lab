@@ -15,7 +15,7 @@ const LabslistView = () => {
     // catch and show data to users
     useEffect(() => {
         // Subscribe to query with onSnapshot
-        const unsubscribe = Labslist.limit(100).onSnapshot(querySnapshot => {
+        const unsubscribe = Labslist.limit(200).onSnapshot(querySnapshot => {
             // Get all documents from collection - with IDs
             const data = querySnapshot.docs.map(doc => ({
               ...doc.data(),
@@ -34,11 +34,13 @@ const LabslistView = () => {
         e.preventDefault();
         Setlabs(labs.filter((labs)=>
             labs.Title.toLowerCase().includes(search.toLowerCase()) || labs.Title.toUpperCase().includes(search.toUpperCase())||
-            labs.Overview.toLowerCase().includes(search.toLowerCase()) || labs.Overview.toUpperCase().includes(search.toUpperCase()) ||
+            labs.Overview.toLowerCase().includes(search.toLowerCase()) || labs.Overview.toUpperCase().includes(search.toUpperCase())||
             labs.Prof.toLowerCase().includes(search.toLowerCase()) || labs.Prof.toUpperCase().includes(search.toUpperCase())||
             labs.Body.toLowerCase().includes(search.toLowerCase()) || labs.Body.toUpperCase().includes(search.toUpperCase()) ||
             labs.Skills.toLowerCase().includes(search.toLowerCase()) || labs.Skills.toUpperCase().includes(search.toUpperCase())||
-            labs.Semester.toLowerCase().includes(search.toLowerCase()) || labs.Semester.toUpperCase().includes(search.toUpperCase())
+            labs.Semester.toLowerCase().includes(search.toLowerCase()) || labs.Semester.toUpperCase().includes(search.toUpperCase())  
+            // labs.Department.toLowerCase().includes(search.toLowerCase()) || labs.Department.toUpperCase().includes(search.toUpperCase())
+
         ));
     };
 
@@ -69,6 +71,7 @@ const LabslistView = () => {
                 
                 <div key = {lab.id}>
                     <h1> {lab.Title}</h1>
+                    <h3> {lab.Department}</h3>
                     <h3> {lab.Overview} </h3>
                     <h4> {lab.Prof}</h4>
                     {/*<p> {lab.Body} </p>
