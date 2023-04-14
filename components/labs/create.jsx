@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'wouter';
 
 import fb from '../../firebase';
 const DB = fb.firestore()
@@ -10,6 +11,7 @@ const Labs = DB.collection('labs');
 const CreateLab = () => {
     // lab content vars
     const [title, SetTitle] = useState("");
+    const [department, SetDepartment]= useState("");
     const [overview, SetOverview] = useState("");
     const [prof, SetProf] = useState("");
     const [body, SetBody] = useState("");
@@ -22,6 +24,7 @@ const CreateLab = () => {
         e.preventDefault();
         Labs.add ({
             Title: title,
+            Department: department,
             Overview: overview,
             Prof: prof,
             Body: body,
@@ -42,6 +45,7 @@ const CreateLab = () => {
             <h2>Write the content of your lab </h2>
 
             </div>
+            
 
 
                 <form onSubmit={(event) => {submit(event)}}>    
@@ -49,6 +53,13 @@ const CreateLab = () => {
         
                     <textarea  name="TITLE" type="text" placeholder="Insert the title of your lab"
                     rows="3" cols="30" onChange={(e)=>{SetTitle(e.target.value)}} required >
+                    </textarea> 
+                    </div>
+
+                    <div>
+                        
+                    <textarea  name="department" type="text" placeholder="Enter your department"
+                    rows="10" cols="20" onChange={(e)=>{SetDepartment(e.target.value)}} required >
                     </textarea> 
                     </div>
                     
@@ -84,11 +95,22 @@ const CreateLab = () => {
 
                     <div>
                     <button type="submit" >Submit</button>
-                    <button onClick={() => window.location.reload(true)}>Clear</button>
+                    <li>
+                            <Link href={"/back"}> 
+                    <button onClick={() => window.location.reload(true)}>Done</button>
+                    </Link>
+
+                        </li>
+                    
 
                     </div>
                      
              </form>
+
+             <div>
+                        
+            
+            </div>
 
              
              
