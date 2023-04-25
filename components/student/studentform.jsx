@@ -1,6 +1,7 @@
 // allows students to apply for a lab
 import React, {useState} from 'react';
 import { Link } from 'wouter';
+import Card from 'react-bootstrap/Card';
 import fb from '../../firebase';
 // import { Link } from 'react-router-dom';
 const DB = fb.firestore()
@@ -11,7 +12,8 @@ const StudentForm= DB.collection('studentform');
 // create lab function
 const StudentInfo = () => {
     // lab content vars
-    const [name, SetName] = useState("");
+    const [f_name, SetFName] = useState("");
+    const [l_name, SetLName] = useState("");
     const [m_number, SetMnumber] = useState("");
     const [email, SetEmail] = useState("");
     const [body, SetBody] = useState("");
@@ -23,7 +25,8 @@ const StudentInfo = () => {
     const submit = (e)=> {
         e.preventDefault();
         StudentForm.add ({
-            Name: name,
+            FName: f_name,
+            LName: l_name,
             M_number: m_number,
             Email: email,
             Body: body,
@@ -38,73 +41,89 @@ const StudentInfo = () => {
         });
     }
     return (
+        <Card style={{  borderWidth: '2px', borderStyle: 'solid', margin: '100px',backgroundColor:'hsl(209, 98%, 52%, 0.3)'}}>
+                <Card.Body>
         <div>
+            
             <div>
             
             <h2>Please fill out the following form </h2>
 
             </div>
 
-
+           
                 <form onSubmit={(event) => {submit(event)}}>    
-                    <div>
-                    <div> Name </div>
-                    <textarea  name="name" type="text" placeholder="Insert your name"
-                    rows="3" cols="30" onChange={(e)=>{SetName(e.target.value)}} required >
-                     </textarea> 
-                    </div>
+                
+
+                
+                    <div >
                     
-                    <div>
-                    <div> M number </div>
-                    <textarea  name="mnumber" type="text" placeholder="Your M#"
-                    rows="10" cols="20" onChange={(e)=>{SetMnumber(e.target.value)}} required >
-                    </textarea> 
+
+                        <div style= {{margin: '10px'}}> First Name:  
+                            <input type="text" class="form-control" placeholder="First name" onChange={(e)=>{SetFName(e.target.value)}} required />
+
+                            Last Name: 
+                            <input type="text" class="form-control" placeholder="Last name" onChange={(e)=>{SetLName(e.target.value)}} required />
+                        </div>
+
+                    <br></br>
+                        <div>
+                          M Number:                           
+                         <input type="text" class="form-control" placeholder="M# " onChange={(e)=>{SetMnumber(e.target.value)}} required />
+
+                         MT Mail:
+                         <input type="text" class="form-control" placeholder="@mtmail.mtsu.edu" onChange={(e)=>{SetEmail(e.target.value)}} required />
+                         </div> 
                     </div>
+                    <br></br>
                     
-                    <div> 
-                    <div> MTMail </div>
-                    <textarea  name="email" type="text" placeholder="your mt mail"
-                    rows="10" cols="20" onChange={(e)=>{SetEmail(e.target.value)}} required >
-                    </textarea> 
-                    </div>
-                        
-                    <div>
+                     <div>
                     <div> Research Background </div>
                     <textarea  name="content" type="text" placeholder="Any prior background"
-                     rows="5" cols="50" onChange={(e)=>{SetBody(e.target.value)}} required >
+                     rows="10" cols="50" onChange={(e)=>{SetBody(e.target.value)}} required >
                      </textarea>
                     </div>
+
+                    <br></br>
 
                     <div>
                     <div> Key Skills </div>
                     <textarea  name="key skills" type="text" placeholder="What skills do you have"
-                    rows="10" cols="20" onChange={(e)=>{SetSkills(e.target.value)}} required >
+                    rows="5" cols="50" onChange={(e)=>{SetSkills(e.target.value)}} required >
                     </textarea> 
                     </div>
 
-                    <div> 
+                    <br></br>
+                     {/* <div> 
+                        
                     <div> Semester Duration </div>
                     <input //prof
-                    type="text" placeholder="What and how many semesters are you available" 
+                    type="text" placeholder="Semesters" 
                     onChange={(e)=>{SetSemester(e.target.value)}} required /> 
-                    </div>
+                    </div>*/}
+
+                    <br></br>
 
                     <div>
                     <button type="submit" >Submit</button>
+                    <Link href="/back"> 
+                        <button>   Done</button>
+                    </Link>
+             
                     {/*<button onClick={() => window.location.reload(true)}>Clear</button>*/}
 
                     </div>
-                     
+                    
              </form>
+            
              
-             <Link href="/back"> 
-                        <button> Done</button>
-            </Link>
-             
+            
             
              
 
             </div>
+            </Card.Body>
+                </Card>
     );
 };
 

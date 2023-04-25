@@ -3,6 +3,13 @@ import CreateLab from "./components/labs/create"
 import LabslistView from "./components/lablist"
 import LabDetailView from "./components/labs/show"
 import StudentInfo from "./components/student/studentform"
+import Card from 'react-bootstrap/Card';
+
+import Login from './components/Login'
+import Signup from './components/Signup'
+
+import UserAuthContext from './context/UserAuthContext';
+
 //import StudentlistView from './components/studentlist'
 import './App.css'
 import { Route, Link, Switch, useLocation} from 'wouter'
@@ -13,7 +20,10 @@ import { Route, Link, Switch, useLocation} from 'wouter'
 function App() {
  
   return (
+    
+    
     <div className="App">
+    <UserAuthContext>
       <Switch>
       <Route path="/login">
       <div className="header">
@@ -21,19 +31,15 @@ function App() {
           <li>
             <Link href="/back">back</Link>
           </li>
-        </ul>
-        
+        </ul>   
       </div>
-        <p>Please Login</p>
-        <br></br><br></br>
-        <input type="text" placeholder="full name"></input>
-        <br></br><br></br>
-        <input type="text" placeholder='M#'></input>
-        <br></br><br></br>
-        <Link href="/logged">
-          <button>Submit</button>
-        </Link>
+      <Login></Login>
+      
       </Route>
+      <Route path="/signup">
+        <Signup></Signup>
+      </Route>
+      
       <Route  path="/logged">
           <div className="header">
             <br></br>
@@ -102,8 +108,10 @@ function App() {
           </div>
         </Route>
       </Switch>
+      </UserAuthContext>
     </div>
   )
 }
+
 
 export default App
